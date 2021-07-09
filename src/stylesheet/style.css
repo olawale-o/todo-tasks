@@ -29,7 +29,7 @@ li {
   font-style: italic;
 }
 
-.todo-container{
+.todo-container {
   width: 40rem;
   margin: 5rem auto 0;
 }
@@ -78,7 +78,7 @@ li {
 }
 
 .button {
-  background: #F2F3E6;
+  background: #f2f3e6;
   padding: 1rem;
 }
 
