@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100;200;300;400;500&display=swap');
+
+:root {
+  --bg-color: #d4d8b0;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 62.5%;
+  background: var(--bg-color);
+}
+
+li {
+  list-style: none;
+}
+
+::placeholder {
+  font-style: italic;
+}
+
+.todo-container{
+  width: 40rem;
+  margin: 5rem auto 0;
+}
+
+.todo-content {
+  background: #fff;
+  font-size: 1.5rem;
+}
+
+.todo-list {
+  cursor: pointer;
+}
+
+.field {
+  padding: 1rem;
+  border-bottom: 1px solid #000;
+}
+
+.input-field {
+  border-bottom: 1px solid #000;
+}
+
+.heading {
+  font-size: 2rem;
+}
+
+.todo-list__task {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.todo-list__text {
+  margin-left: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem;
+  outline: none;
+  border: none;
+}
+
+.button {
+  background: #F2F3E6;
+  padding: 1rem;
+}
+
+.btn {
+  background: none;
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
