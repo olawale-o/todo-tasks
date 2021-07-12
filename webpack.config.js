@@ -10,7 +10,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Todo Tasks',
       template: './src/index.html',
-      filename: 'main.html',
+      filename: 'index.html',
     }),
   ],
   module: {
@@ -23,7 +23,8 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: __dirname+'/dist',
+    /* eslint-disable */
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
 };
