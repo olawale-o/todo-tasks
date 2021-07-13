@@ -34,6 +34,7 @@ const createTodo = (todo) => {
   const checkbox = document.createElement('input');
   checkbox.setAttribute('type', 'checkbox');
   checkbox.setAttribute('name', 'todo-task');
+  checkbox.checked = todo.completed ? true : false;
   label.appendChild(checkbox);
   const sp = document.createElement('span');
   sp.setAttribute('class', 'checkmark');
@@ -45,6 +46,9 @@ const createTodo = (todo) => {
   const icon = document.createElement('i');
   icon.setAttribute('class', 'bx bx-dots-vertical-rounded');
   icon.setAttribute('id', `icon-${todo.index}`);
+  checkbox.onchange = () => {
+    change(todo, todos);
+  };
   left.appendChild(label);
   left.appendChild(span);
   div.appendChild(left);
