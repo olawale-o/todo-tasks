@@ -1,6 +1,8 @@
 import tasks from './tasks.js';
 import { isStorage, getStorage, setStorage } from './storage.js';
-import { dragStart, dragEnter, dragLeave, dragEnd, drop } from './interactive.js';
+import {
+  dragStart, dragEnter, dragLeave, dragEnd, drop,
+} from './interactive.js';
 import change from './change.js';
 import './stylesheet/style.css';
 
@@ -19,7 +21,6 @@ const todoTasks = document.querySelector('#todo-tasks');
 const target = document.getElementById('todo-tasks');
 const items = target.getElementsByTagName('li');
 
-
 const dragAll = () => {
   for (let a = 0; a < items.length; a += 1) {
     const i = items[a];
@@ -34,7 +35,7 @@ const dragAll = () => {
     });
     i.addEventListener('drop', drop);
   }
-}
+};
 
 const createTodo = (todo) => {
   const li = document.createElement('li');
@@ -51,7 +52,7 @@ const createTodo = (todo) => {
   const checkbox = document.createElement('input');
   checkbox.setAttribute('type', 'checkbox');
   checkbox.setAttribute('name', 'todo-task');
-  checkbox.checked = todo.completed ? true : false;
+  checkbox.checked = todo.completed === true;
   checkbox.onchange = () => {
     change(todo, todos);
   };
