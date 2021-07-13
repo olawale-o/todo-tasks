@@ -1,0 +1,192 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100;200;300;400;500&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&display=swap');
+
+:root {
+  --bg-color: #f6f6f6;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 62.5%;
+  background: var(--bg-color);
+  font-family: 'Open Sans', sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+::placeholder {
+  font-style: italic;
+  opacity: 0.3;
+}
+
+i {
+  color: #b7b7b7;
+  cursor: pointer;
+}
+
+.todo-container {
+  width: 50%;
+  margin: 5rem auto 0;
+  padding: 20px 5%;
+}
+
+.todo-content {
+  background: #fff;
+  font-size: 1.5rem;
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 22px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border: 2px solid #b7b7b7;
+}
+
+/* On mouse-over, add a grey background color */
+.label:hover input ~ .checkmark {
+  background-color: transparent;
+}
+
+/* When the checkbox is checked, add a blue background */
+.label input:checked ~ .checkmark {
+  background-color: transparent;
+  border: none;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Style the checkmark/indicator */
+.label .checkmark::after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid #2196f3;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Show the checkmark when checked */
+.label input:checked ~ .checkmark::after {
+  display: block;
+}
+
+.todo-list {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.field {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: #494949;
+}
+
+.input-field {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: #aeaeae;
+  padding: 15px;
+  position: relative;
+}
+
+.input-field span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.heading {
+  font-size: 1.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bolder;
+  line-height: 20px;
+  color: #363636;
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-list__task {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.todo-list__text {
+  margin-left: 1rem;
+}
+
+.input {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 2rem;
+}
+
+.button {
+  background: var(--bg-color);
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn {
+  background: transparent;
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin: 1rem auto;
+  opacity: 0.5;
+}
