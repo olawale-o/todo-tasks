@@ -33,7 +33,11 @@ li {
 
 i {
   color: #b7b7b7;
-  cursor: pointer;
+  cursor: move;
+}
+
+i:hover {
+  color: #000;
 }
 
 .todo-container {
