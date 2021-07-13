@@ -16,6 +16,26 @@ if (isStorage(todoKey)) {
 
 const todoTasks = document.querySelector('#todo-tasks');
 
+const target = document.getElementById('todo-tasks');
+const items = target.getElementsByTagName('li');
+
+
+const dragAll = () => {
+  for (let a = 0; a < items.length; a += 1) {
+    const i = items[a];
+    i.draggable = true;
+    i.addEventListener('dragstart', dragStart);
+    i.addEventListener('dragenter', dragEnter);
+    i.addEventListener('dragleave', dragLeave);
+    i.addEventListener('dragend', dragEnd);
+    i.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      i.style.opacity = 0.2;
+    });
+    i.addEventListener('drop', drop);
+  }
+}
+
 const createTodo = (todo) => {
   const li = document.createElement('li');
   li.setAttribute('class', 'todo-list');
@@ -25,9 +45,6 @@ const createTodo = (todo) => {
   const left = document.createElement('div');
   left.setAttribute('class', 'left');
   left.setAttribute('id', `left-${todo.index}`);
-  // const checkbox = document.createElement('input');
-  // checkbox.setAttribute('type', 'checkbox');
-  // checkbox.setAttribute('name', 'todo-task');
   const label = document.createElement('label');
   label.setAttribute('class', 'label');
   label.setAttribute('id', `label-${todo.index}`);
@@ -35,6 +52,9 @@ const createTodo = (todo) => {
   checkbox.setAttribute('type', 'checkbox');
   checkbox.setAttribute('name', 'todo-task');
   checkbox.checked = todo.completed ? true : false;
+  checkbox.onchange = () => {
+    change(todo, todos);
+  };
   label.appendChild(checkbox);
   const sp = document.createElement('span');
   sp.setAttribute('class', 'checkmark');
@@ -46,9 +66,7 @@ const createTodo = (todo) => {
   const icon = document.createElement('i');
   icon.setAttribute('class', 'bx bx-dots-vertical-rounded');
   icon.setAttribute('id', `icon-${todo.index}`);
-  checkbox.onchange = () => {
-    change(todo, todos);
-  };
+  icon.onmousedown = dragAll;
   left.appendChild(label);
   left.appendChild(span);
   div.appendChild(left);
@@ -60,32 +78,3 @@ const createTodo = (todo) => {
 todos.forEach((task) => {
   todoTasks.appendChild(createTodo(task));
 });
-
-const target = document.getElementById('todo-tasks');
-const items = target.getElementsByTagName('li');
-
-for (let a = 0; a < items.length; a += 1) {
-  // (B1) ATTACH DRAGGABLE
-  const i = items[a];
-  i.draggable = true;
-
-  // (B2) DRAG START - YELLOW HIGHLIGHT DROPZONES
-  i.addEventListener('dragstart', dragStart);
-
-  // (B3) DRAG ENTER - RED HIGHLIGHT DROPZONE
-  i.addEventListener('dragenter', dragEnter);
-
-  // (B4) DRAG LEAVE - REMOVE RED HIGHLIGHT
-  i.addEventListener('dragleave', dragLeave);
-
-  // (B5) DRAG END - REMOVE ALL HIGHLIGHTS
-  i.addEventListener('dragend', dragEnd);
-
-  // (B6) DRAG OVER - PREVENT THE DEFAULT "DROP", SO WE CAN DO OUR OWN
-  i.addEventListener('dragover', (event) => {
-    event.preventDefault();
-  });
-
-  // (B7) ON DROP - DO SOMETHING
-  i.addEventListener('drop', drop);
-}
