@@ -14,7 +14,7 @@ if (isStorage(todoKey)) {
   todos = getStorage(todoKey);
 }
 
-const todoTasks = document.querySelector('.todo-tasks');
+const todoTasks = document.querySelector('#todo-tasks');
 
 const createTodo = (todo) => {
   const li = document.createElement('li');
@@ -40,7 +40,7 @@ const createTodo = (todo) => {
   label.appendChild(sp);
   const span = document.createElement('span');
   span.setAttribute('class', 'todo-list__text');
-  span.setAttribute('id', `span-${todo.id}`);
+  span.setAttribute('id', `span-${todo.index}`);
   span.textContent = todo.description;
   const icon = document.createElement('i');
   icon.setAttribute('class', 'bx bx-dots-vertical-rounded');
@@ -53,7 +53,7 @@ const createTodo = (todo) => {
   return li;
 };
 
-tasks.forEach((task) => {
+todos.forEach((task) => {
   todoTasks.appendChild(createTodo(task));
 });
 
