@@ -50,6 +50,13 @@ i {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+.todo-tasks li.hint { 
+  background: #fea;
+}
+.todo-tasks li.active { 
+  background: #ffd4d4; 
+}
+
 .label {
   display: block;
   position: relative;
