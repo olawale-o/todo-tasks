@@ -3,6 +3,10 @@ import {
   dragStart, dragEnter, dragLeave, dragEnd, drop,
 } from './interactive.js';
 import change from './change.js';
+import {
+  addNewTodo, clearAllCompletedTodos, editTodo, onDeleteTodo,
+} from './add-remove.js';
+
 import './stylesheet/style.css';
 
 const todoKey = 'TODOS';
@@ -19,25 +23,6 @@ const todoTasks = document.querySelector('#todo-tasks');
 
 const target = document.getElementById('todo-tasks');
 const items = target.getElementsByTagName('li');
-
-const updateTodo = (target) => {
-  const id = parseInt(target.id.split('-')[1], 10);
-  todos.forEach((todo) => {
-    if (id === todo.index) {
-      todo.description = target.textContent;
-    }
-  });
-  setStorage('TODOS', todos);
-};
-
-const onDeleteTodo = (target) => {
-  const id = parseInt(target.split('-')[1], 10);
-  todos = todos.filter((todo) => id !== todo.index);
-  todoTasks.innerHTML = '';
-  todos.forEach((td, i) => {
-    td.index = i + 1;
-  });
-};
 
 const dragAll = () => {
   for (let a = 0; a < items.length; a += 1) {
@@ -114,7 +99,13 @@ const createTodo = (todo) => {
   });
 
   bin.addEventListener('mousedown', (event) => {
-    onDeleteTodo(event.target.id);
+    todos = onDeleteTodo(event.target.id, todos);
+
+    todoTasks.innerHTML = '';
+    todos.forEach((td, i) => {
+      td.index = i + 1;
+    });
+
     todos.forEach((task) => {
       todoTasks.appendChild(createTodo(task));
     });
@@ -136,7 +127,7 @@ const createTodo = (todo) => {
       event.target.style.textDecorationColor = 'initial';
       completed = null;
     }
-    updateTodo(event.target);
+    editTodo(event.target, todos);
     li.classList.remove('focus');
     span.removeAttribute('contenteditable');
   });
@@ -150,42 +141,26 @@ todos.forEach((task) => {
 
 const addkey = document.querySelector('#add');
 const task = document.querySelector('#task');
-const addNewTodo = () => {
-  const newTodo = {
-    description: task.value,
-    completed: false,
-  };
 
-  if (todos.length < 1) {
-    newTodo.index = 1;
-    todos.push(newTodo);
-    setStorage('TODOS', todos);
-  } else {
-    newTodo.index = todos.length + 1;
-    todos.push(newTodo);
-    setStorage('TODOS', todos);
-  }
+addkey.addEventListener('click', () => {
+  const newTodo = addNewTodo(task, todos);
   todoTasks.appendChild(createTodo(newTodo));
   task.value = '';
-};
+});
 
-addkey.addEventListener('click', addNewTodo);
 task.addEventListener('keydown', (event) => {
   if (event.which === 13) {
-    addNewTodo();
+    const newTodo = addNewTodo(task, todos);
+    todoTasks.appendChild(createTodo(newTodo));
+    task.value = '';
   }
 });
 
 const trashAll = document.querySelector('#trash-all');
-
 trashAll.addEventListener('click', () => {
-  todos = todos.filter((todo) => todo.completed === false);
-  todos.forEach((todo, i) => {
-    todo.index = i + 1;
-  });
-  setStorage('TODOS', todos);
+  const tds = clearAllCompletedTodos(todos);
   todoTasks.innerHTML = '';
-  todos.forEach((task) => {
+  tds.forEach((task) => {
     todoTasks.appendChild(createTodo(task));
   });
 });
