@@ -1,4 +1,4 @@
-import tasks from './tasks.js';
+// import tasks from './tasks.js';
 import { isStorage, getStorage, setStorage } from './storage.js';
 import {
   dragStart, dragEnter, dragLeave, dragEnd, drop,
@@ -12,7 +12,7 @@ let todos = [];
 if (isStorage(todoKey)) {
   todos = getStorage(todoKey);
 } else {
-  setStorage(todoKey, tasks);
+  setStorage(todoKey, todos);
   todos = getStorage(todoKey);
 }
 
@@ -72,7 +72,7 @@ const createTodo = (todo) => {
   span.setAttribute('class', 'todo-list__text');
   span.setAttribute('id', `span-${todo.index}`);
   span.textContent = todo.description;
-
+  span.style.textDecoration = todo.completed === true ? 'line-through' : 'none';
   checkbox.setAttribute('type', 'checkbox');
   checkbox.setAttribute('name', 'todo-task');
   checkbox.checked = todo.completed === true;
@@ -109,7 +109,7 @@ const createTodo = (todo) => {
     icon.classList.toggle('hide');
   };
 
-  li.addEventListener('click', () => {
+  span.addEventListener('click', () => {
     span.setAttribute('contenteditable', true);
     span.focus();
   });
@@ -121,14 +121,22 @@ const createTodo = (todo) => {
     });
     setStorage('TODOS', todos);
   });
-
-  span.addEventListener('focus', () => {
+  let completed = null;
+  span.addEventListener('focus', (event) => {
     toggleButtons();
+    if (event.target.style.textDecoration === 'line-through') {
+      span.style.textDecorationColor = 'transparent';
+      completed = true;
+    }
     li.classList.add('focus');
   });
 
   span.addEventListener('blur', (event) => {
     toggleButtons();
+    if (completed) {
+      event.target.style.textDecorationColor = 'initial';
+      completed = null;
+    }
     updateTodo(event.target);
     li.classList.remove('focus');
     span.removeAttribute('contenteditable');
@@ -139,4 +147,46 @@ const createTodo = (todo) => {
 
 todos.forEach((task) => {
   todoTasks.appendChild(createTodo(task));
+});
+
+const addkey = document.querySelector('#add');
+const task = document.querySelector('#task');
+const addNewTodo = () => {
+  const newTodo = {
+    description: task.value,
+    completed: false,
+  };
+
+  if (todos.length < 1) {
+    newTodo.index = 1;
+    todos.push(newTodo);
+    setStorage('TODOS', todos);
+  } else {
+    newTodo.index = todos.length + 1;
+    todos.push(newTodo);
+    setStorage('TODOS', todos);
+  }
+  todoTasks.appendChild(createTodo(newTodo));
+  task.value = '';
+};
+
+addkey.addEventListener('click', addNewTodo);
+task.addEventListener('keydown', (event) => {
+  if (event.which === 13) {
+    addNewTodo();
+  }
+});
+
+const trashAll = document.querySelector('#trash-all');
+
+trashAll.addEventListener('click', () => {
+  todos = todos.filter((todo) => todo.completed === false);
+  todos.forEach((todo, i) => {
+    todo.index = i + 1;
+  });
+  setStorage('TODOS', todos);
+  todoTasks.innerHTML = '';
+  todos.forEach((task) => {
+    todoTasks.appendChild(createTodo(task));
+  });
 });
