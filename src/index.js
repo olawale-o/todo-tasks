@@ -29,12 +29,16 @@ const updateTodo = (target) => {
     }
   });
   setStorage('TODOS', todos);
-}
+};
 
-const onDeleteTodo = (todo) => {
-  console.log('wales')
-  console.log(todo)
-}
+const onDeleteTodo = (target) => {
+  const id = parseInt(target.split('-')[1], 10);
+  todos = todos.filter((todo) => id !== todo.index);
+  todoTasks.innerHTML = '';
+  todos.forEach((td, i) => {
+    td.index = i + 1;
+  });
+};
 
 const dragAll = () => {
   for (let a = 0; a < items.length; a += 1) {
@@ -58,13 +62,17 @@ const createTodo = (todo) => {
   li.setAttribute('id', `id-${todo.index}`);
   const div = document.createElement('div');
   div.setAttribute('class', 'field todo-list__task');
-  const left = document.createElement('div');
-  left.setAttribute('class', 'left');
-  left.setAttribute('id', `left-${todo.index}`);
+
   const label = document.createElement('label');
   label.setAttribute('class', 'label');
   label.setAttribute('id', `label-${todo.index}`);
   const checkbox = document.createElement('input');
+
+  const span = document.createElement('span');
+  span.setAttribute('class', 'todo-list__text');
+  span.setAttribute('id', `span-${todo.index}`);
+  span.textContent = todo.description;
+
   checkbox.setAttribute('type', 'checkbox');
   checkbox.setAttribute('name', 'todo-task');
   checkbox.checked = todo.completed === true;
@@ -80,34 +88,52 @@ const createTodo = (todo) => {
   const sp = document.createElement('span');
   sp.setAttribute('class', 'checkmark');
   label.appendChild(sp);
-  const span = document.createElement('span');
-  span.setAttribute('class', 'todo-list__text');
-  span.setAttribute('id', `span-${todo.index}`);
-  span.textContent = todo.description;
 
-  span.setAttribute('contenteditable', true);
-  span.onblur = (event) => {
-    updateTodo(event.target)
-  }
+  const bin = document.createElement('i');
+  bin.setAttribute('class', 'bx bx-trash-alt bin hide');
+  bin.setAttribute('id', `bin-${todo.index}`);
+
   const icon = document.createElement('i');
-  icon.setAttribute('class', 'bx bx-dots-vertical-rounded');
+  icon.setAttribute('class', 'bx bx-dots-vertical-rounded move');
   icon.setAttribute('id', `icon-${todo.index}`);
   icon.onmousedown = dragAll;
 
-  const bin = document.createElement('i');
-  bin.setAttribute('class', 'bx bx-trash-alt bin');
-  bin.setAttribute('id', `bin-${todo.index}`);
-
-  bin.onclick = (event) => {
-    console.log(event)
-    onDeleteTodo()
-  }
-
-  left.appendChild(label);
-  left.appendChild(span);
-  div.appendChild(left);
+  div.appendChild(label);
+  div.appendChild(span);
   div.appendChild(icon);
+  div.appendChild(bin);
   li.appendChild(div);
+
+  const toggleButtons = () => {
+    bin.classList.toggle('hide');
+    icon.classList.toggle('hide');
+  };
+
+  li.addEventListener('click', () => {
+    span.setAttribute('contenteditable', true);
+    span.focus();
+  });
+
+  bin.addEventListener('mousedown', (event) => {
+    onDeleteTodo(event.target.id);
+    todos.forEach((task) => {
+      todoTasks.appendChild(createTodo(task));
+    });
+    setStorage('TODOS', todos);
+  });
+
+  span.addEventListener('focus', () => {
+    toggleButtons();
+    li.classList.add('focus');
+  });
+
+  span.addEventListener('blur', (event) => {
+    toggleButtons();
+    updateTodo(event.target);
+    li.classList.remove('focus');
+    span.removeAttribute('contenteditable');
+  });
+
   return li;
 };
 
