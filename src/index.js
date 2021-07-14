@@ -21,6 +21,16 @@ const todoTasks = document.querySelector('#todo-tasks');
 const target = document.getElementById('todo-tasks');
 const items = target.getElementsByTagName('li');
 
+const updateTodo = (target) => {
+  const id = parseInt(target.id.split('-')[1], 10);
+  todos.forEach((todo) => {
+    if (id === todo.index) {
+      todo.description = target.textContent;
+    }
+  });
+  setStorage('TODOS', todos);
+}
+
 const onDeleteTodo = (todo) => {
   console.log('wales')
   console.log(todo)
@@ -74,6 +84,11 @@ const createTodo = (todo) => {
   span.setAttribute('class', 'todo-list__text');
   span.setAttribute('id', `span-${todo.index}`);
   span.textContent = todo.description;
+
+  span.setAttribute('contenteditable', true);
+  span.onblur = (event) => {
+    updateTodo(event.target)
+  }
   const icon = document.createElement('i');
   icon.setAttribute('class', 'bx bx-dots-vertical-rounded');
   icon.setAttribute('id', `icon-${todo.index}`);
