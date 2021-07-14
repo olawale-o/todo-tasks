@@ -21,6 +21,11 @@ const todoTasks = document.querySelector('#todo-tasks');
 const target = document.getElementById('todo-tasks');
 const items = target.getElementsByTagName('li');
 
+const onDeleteTodo = (todo) => {
+  console.log('wales')
+  console.log(todo)
+}
+
 const dragAll = () => {
   for (let a = 0; a < items.length; a += 1) {
     const i = items[a];
@@ -73,6 +78,16 @@ const createTodo = (todo) => {
   icon.setAttribute('class', 'bx bx-dots-vertical-rounded');
   icon.setAttribute('id', `icon-${todo.index}`);
   icon.onmousedown = dragAll;
+
+  const bin = document.createElement('i');
+  bin.setAttribute('class', 'bx bx-trash-alt bin');
+  bin.setAttribute('id', `bin-${todo.index}`);
+
+  bin.onclick = (event) => {
+    console.log(event)
+    onDeleteTodo()
+  }
+
   left.appendChild(label);
   left.appendChild(span);
   div.appendChild(left);
