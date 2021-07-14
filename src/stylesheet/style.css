@@ -40,7 +40,8 @@ i {
   cursor: move;
 }
 
-i.bin {
+i.bin,
+i.return {
   cursor: pointer;
 }
 
@@ -55,7 +56,6 @@ i:hover {
 }
 
 .todo-content {
-  /* background: #fff; */
   font-size: 1.5rem;
   border-radius: 3px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -198,6 +198,8 @@ li.focus {
   outline: none;
   border: none;
   font-size: 2rem;
+  font-weight: lighter;
+  font-style: italic;
 }
 
 .button {
