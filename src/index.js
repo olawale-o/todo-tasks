@@ -1,4 +1,3 @@
-// import tasks from './tasks.js';
 import { isStorage, getStorage, setStorage } from './storage.js';
 import {
   dragStart, dragEnter, dragLeave, dragEnd, drop,
