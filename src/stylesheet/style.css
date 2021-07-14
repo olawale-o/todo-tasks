@@ -31,9 +31,17 @@ li {
   opacity: 0.3;
 }
 
+[contenteditable] {
+  outline: 0 solid transparent;
+}
+
 i {
   color: #b7b7b7;
   cursor: move;
+}
+
+i.bin {
+  cursor: pointer;
 }
 
 i:hover {
@@ -140,12 +148,13 @@ i:hover {
   background: #fff;
 }
 
-.todo-tasks li.hint {
+li.focus {
   background: #fea;
 }
 
-.todo-tasks li.active {
-  background: #ffd4d4;
+.hide {
+  display: none;
+  visibility: hidden;
 }
 
 .todo-tasks li.border {
@@ -177,13 +186,11 @@ i:hover {
   justify-content: space-between;
 }
 
-.left {
-  display: flex;
-  align-items: center;
-}
-
 .todo-list__text {
   margin-left: 1rem;
+  flex: 5;
+  display: flex;
+  justify-content: space-between;
 }
 
 .input {
