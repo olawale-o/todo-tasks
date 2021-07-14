@@ -55,6 +55,11 @@ const createTodo = (todo) => {
   checkbox.checked = todo.completed === true;
   checkbox.onchange = () => {
     change(todo, todos);
+    if (todo.completed) {
+      span.style.textDecoration = 'line-through';
+    } else {
+      span.style.textDecoration = 'none';
+    }
   };
   label.appendChild(checkbox);
   const sp = document.createElement('span');
