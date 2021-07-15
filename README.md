@@ -11,7 +11,7 @@
 - JAVASCRIPT
 
 # Demo Link
-Visit [Link](https://olawale-o.github.io/todo-tasks/)
+Visit [Link](https://olawale-o.github.io/todo-tasks/dist)
 
 # Getting started
 
