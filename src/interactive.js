@@ -9,10 +9,6 @@ export function dragStart() {
   current = this;
   for (let b = 0; b < items.length; b += 1) {
     const it = items[b];
-    // apply this style to list except the darraged one;
-    // if (it !== current) {
-    //   it.classList.add('hint');
-    // }
     if (it === current) {
       it.classList.add('border');
     }
@@ -22,7 +18,6 @@ export function dragStart() {
 export function dragEnter() {
   if (this !== current) {
     this.style.opacity = 0.2;
-    // this.classList.add('active');
   }
 }
 
@@ -33,17 +28,14 @@ export function dragLeave(event) {
   } else {
     this.style.opacity = 1;
   }
-  // this.classList.remove('active');
 }
 
 export function dragEnd() {
   for (let a = 0; a < items.length; a += 1) {
     const it = items[a];
     it.classList.remove('border');
-    // it.classList.remove('hint');
     this.style.visibility = 'visible';
     it.style.opacity = 1;
-    // it.classList.remove('active');
   }
 }
 
@@ -61,10 +53,8 @@ export function drop(event) {
       }
     }
     if (currentpos < droppedpos) {
-      // inserts after
       this.parentNode.insertBefore(current, this.nextSibling);
     } else {
-      // inserts before
       this.parentNode.insertBefore(current, this);
     }
   }

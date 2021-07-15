@@ -1,11 +1,17 @@
 # Todo Tasks
 
 > This is a Todo list built using webpack and served by a webpack dev server.
+
+# Screenshot
+![screenshot](https://github.com/olawale-o/todo-tasks/blob/main/src/assets/todo-list-screenshot.png?raw=true")
 # Built With
 
 - HTML
 - CSS
 - JAVASCRIPT
+
+# Demo Link
+Visit [Link](https://olawale-o.github.io/todo-tasks/)
 
 # Getting started
 

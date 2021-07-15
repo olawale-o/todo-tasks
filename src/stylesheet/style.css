@@ -31,9 +31,18 @@ li {
   opacity: 0.3;
 }
 
+[contenteditable] {
+  outline: 0 solid transparent;
+}
+
 i {
   color: #b7b7b7;
   cursor: move;
+}
+
+i.bin,
+i.return {
+  cursor: pointer;
 }
 
 i:hover {
@@ -47,7 +56,6 @@ i:hover {
 }
 
 .todo-content {
-  /* background: #fff; */
   font-size: 1.5rem;
   border-radius: 3px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -66,7 +74,6 @@ i:hover {
   user-select: none;
 }
 
-/* Hide the browser's default checkbox */
 .label input {
   position: absolute;
   opacity: 0;
@@ -75,7 +82,6 @@ i:hover {
   width: 0;
 }
 
-/* Create a custom checkbox */
 .checkmark {
   position: absolute;
   top: 0;
@@ -85,25 +91,21 @@ i:hover {
   border: 2px solid #b7b7b7;
 }
 
-/* On mouse-over, add a grey background color */
 .label:hover input ~ .checkmark {
   background-color: transparent;
 }
 
-/* When the checkbox is checked, add a blue background */
 .label input:checked ~ .checkmark {
   background-color: transparent;
   border: none;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark::after {
   content: "";
   position: absolute;
   display: none;
 }
 
-/* Style the checkmark/indicator */
 .label .checkmark::after {
   left: 5px;
   top: 5px;
@@ -116,7 +118,6 @@ i:hover {
   transform: rotate(45deg);
 }
 
-/* Show the checkmark when checked */
 .label input:checked ~ .checkmark::after {
   display: block;
 }
@@ -140,12 +141,13 @@ i:hover {
   background: #fff;
 }
 
-.todo-tasks li.hint {
+li.focus {
   background: #fea;
 }
 
-.todo-tasks li.active {
-  background: #ffd4d4;
+.hide {
+  display: none;
+  visibility: hidden;
 }
 
 .todo-tasks li.border {
@@ -177,13 +179,11 @@ i:hover {
   justify-content: space-between;
 }
 
-.left {
-  display: flex;
-  align-items: center;
-}
-
 .todo-list__text {
   margin-left: 1rem;
+  flex: 5;
+  display: flex;
+  justify-content: space-between;
 }
 
 .input {
@@ -191,6 +191,8 @@ i:hover {
   outline: none;
   border: none;
   font-size: 2rem;
+  font-weight: lighter;
+  font-style: italic;
 }
 
 .button {
