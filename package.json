@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "dependencies": {},
   "scripts": {
     "build": "webpack",
     "start": "webpack serve --open",
@@ -11,6 +10,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
     "babel-eslint": "^10.1.0",
     "css-loader": "^5.2.6",
     "eslint": "^7.30.0",
@@ -25,7 +25,7 @@
     "stylelint-scss": "^3.19.0",
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^1.16.5"
   },
   "repository": {
     "type": "git",
