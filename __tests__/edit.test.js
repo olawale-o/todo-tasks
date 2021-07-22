@@ -2,7 +2,7 @@
  * @jest-environment jsdom
 */
 
-import {editTodo,change} from '../src/edittask_prototype.js';
+import { editTodo, change } from '../src/edittask_prototype.js';
 import { localStorageMock } from '../__mocks__/mockStorage.js';
 import createTodo from '../src/onclickadd.js';
 
@@ -106,7 +106,7 @@ describe('Status update', () => {
     const NewTask3 = { description: 'task 3', completed: false, index: 3 };
     task.push(NewTask3);
     createTodo(task[2]);
-    
+
     task = change(NewTask2, task);
 
     const list = document.querySelectorAll('#todo-tasks li');
@@ -117,7 +117,7 @@ describe('Status update', () => {
     taskBx2.checked = task[1].completed;
     expect(list).toHaveLength(3);
     expect(taskBx2.checked).toEqual(true);
-    
+
     expect(taskBx1.checked).toEqual(false);
   });
 });
