@@ -1,20 +1,16 @@
 import { setStorage } from './storage.js';
 
+export const updateTodosStorage = (newTodo, todos) => {
+  todos.push(newTodo);
+  setStorage('TODOS', todos);
+};
+
 export const addNewTodo = (task, todos) => {
   const newTodo = {
-    description: task.value,
+    index: todos.length < 1 ? 1 : todos.length + 1,
+    description: task,
     completed: false,
   };
-
-  if (todos.length < 1) {
-    newTodo.index = 1;
-    todos.push(newTodo);
-    setStorage('TODOS', todos);
-  } else {
-    newTodo.index = todos.length + 1;
-    todos.push(newTodo);
-    setStorage('TODOS', todos);
-  }
   return newTodo;
 };
 
@@ -38,7 +34,6 @@ export const editTodo = (target, todos) => {
 };
 
 export const onDeleteTodo = (target, todos) => {
-  const id = parseInt(target.split('-')[1], 10);
-  todos = todos.filter((todo) => id !== todo.index);
+  todos = todos.filter((todo) => target !== todo.index);
   return todos;
 };

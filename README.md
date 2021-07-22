@@ -23,6 +23,12 @@ Visit [Link](https://olawale-o.github.io/todo-tasks/dist)
 - Type `git clone (copied link)` on the currently opened terminal or command prompt
 - Remember to change `(copied link)` to `git@github.com:olawale-o/todo-tasks.git` which is the name of the repository
 
+# Getting Start with Testing
+
+- open your Terminal and Navigate to the project destination and type `npm install`
+- To test the whole project use `npm run test`
+- To test test coverage use `npm run test -- --coverage`
+
 # Authors
 
 :bust_in_silhouette: Omoogun Olawale
@@ -30,6 +36,13 @@ Visit [Link](https://olawale-o.github.io/todo-tasks/dist)
 - Github: [Github](https://github.com/olawale-o)
 - Twitter: [Twitter](https://twitter.com/ibreaktherules)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/olawale-omoogun-330a051b1/)
+
+:bust_in_silhouette: Abdulrahman Naser
+
+- Github: [Github](https://github.com/Abdona)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/abdulrahman-nasser-2b7173131/)
+
+
 
 # Contributing
 Contributions, issues, and feature requests are welcome!
