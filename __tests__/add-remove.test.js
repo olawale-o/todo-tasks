@@ -3,23 +3,50 @@ import { localStorageMock } from '../__mocks__/mockStorage.js';
 
 describe('Todo', () => {
   describe('Add Todo', () => {
-    test('task 1 should be equal {description; task 1, completed: false, index: 1} ', () => {
-      const task = 'task 1';
+    test('add task1', () => {
+      const task1 = 'task 1';
       const todos = [];
-      const expectedTodo = { description: 'task 1', completed: false, index: 1 };
-      const newTodo = addNewTodo(task, todos);
-      expect(newTodo).toEqual(expectedTodo);
+      const newTodo1 = addNewTodo(task1, todos);
+      todos.push(newTodo1);
+
+      expect(todos[0]).toEqual(newTodo1);
+    });
+    test('add task1,task2 and task3', () => {
+      const task1 = 'task 1';
+      const task2 = 'task 2';
+      const task3 = 'task 3';
+      const todos = [];
+      const newTodo1 = addNewTodo(task1, todos);
+      todos.push(newTodo1);
+      const newTodo2 = addNewTodo(task2,todos);
+      todos.push(newTodo2);
+      const newTodo3 = addNewTodo(task3,todos);
+      todos.push(newTodo3);
+      expect(todos[0]).toEqual(newTodo1);
+      expect(todos[1]).toEqual(newTodo2);
+      expect(todos[2]).toEqual(newTodo3);
     });
   });
 
   describe('Delete Todo', () => {
-    test('task 1 should be equal {description; task 1, completed: false, index: 1} ', () => {
+    test('add task1 and remove task1,todos will reduced to 0', () => {
       let todos = [];
-      const expectedTodo = { description: 'task 1', completed: false, index: 1 };
-
-      todos = onDeleteTodo(expectedTodo.id, todos);
-
+      const task1 = { description: 'task 1', completed: false, index: 1 };
+      todos.push(task1);
+      todos = onDeleteTodo(task1.index, todos);
       expect(todos.length).toEqual(0);
+    });
+
+    test('add task1,task2 and task3,then remove task2.', () => {
+      let todos = [];
+      const task1 = { description: 'task 1', completed: false, index: 1 };
+      todos.push(task1);
+      const task2 = { description: 'task 2', completed: false, index: 2 };
+      todos.push(task2);
+      const task3 = { description: 'task 3', completed: false, index: 3 };
+      todos.push(task3);
+      todos = onDeleteTodo(task2.index, todos);
+      expect(todos.length).toEqual(2);
     });
   });
 
