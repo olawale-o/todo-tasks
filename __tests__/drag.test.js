@@ -3,26 +3,24 @@
 */
 
 import createTodo from '../src/onclickadd.js';
-import { localStorageMock } from '../__mocks__/mockStorage.js';
+import localStoragemock from '../__mocks__/mockStorage.js';
 import drop from '../src/drop_prototype.js';
 
 describe('Drag and Drop', () => {
   test('Update index of task1 and task2 after drap and drop in localsStorage', () => {
-    localStorageMock.setItem('TODOS', []);
-    let todos = localStorageMock.getItem('TODOS');
+    localStoragemock.setItem('TODOS', []);
+    let todos = [];
     const taskOne = { description: 'task 1', completed: false, index: 1 };
     todos.push(taskOne);
-    localStorageMock.setItem('TODOS', todos);
+    localStoragemock.setItem('TODOS', todos);
     const taskTwo = { description: 'task 2', completed: true, index: 2 };
     todos.push(taskTwo);
-    localStorageMock.setItem('TODOS', todos);
+    localStoragemock.setItem('TODOS', todos);
     todos = drop(taskTwo, taskOne, todos);
-    localStorageMock.setItem('TODOS', todos);
-    localStorageMock.getItem.mock.results[0].value = todos;
-
-    expect(localStorageMock.getItem.mock.results[0].value[1].description)
+    localStoragemock.setItem('TODOS', todos);
+    expect(localStoragemock.getItem('TODOS')[1].description)
       .toEqual(taskOne.description);
-    expect(localStorageMock.getItem.mock.results[0].value[0].description)
+    expect(localStoragemock.getItem('TODOS')[0].description)
       .toEqual(taskTwo.description);
   });
 

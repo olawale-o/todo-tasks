@@ -3,19 +3,19 @@
 */
 
 import { editTodo, change } from '../src/edittask_prototype.js';
-import { localStorageMock } from '../__mocks__/mockStorage.js';
+import localStoragemock from '../__mocks__/mockStorage.js';
 import createTodo from '../src/onclickadd.js';
 
 describe('Edit task', () => {
   test('task 1 description should be updated to task one', () => {
-    localStorageMock.setItem('Todos', []);
+    localStoragemock.setItem('TODOS', []);
     let todo = [];
     const task1 = { description: 'task 1', completed: false, index: 1 };
     todo.push(task1);
     const task1Edited = { description: 'task one', completed: false, index: 1 };
-    localStorageMock.setItem('Todos', todo);
+    localStoragemock.setItem('TODOS', todo);
     todo = editTodo(task1Edited, todo);
-    expect(todo[0].description).toEqual(task1Edited.description);
+    expect(localStoragemock.getItem('TODOS')[0].description).toEqual(task1Edited.description);
   });
 
   test('Edit single task on the DOM', () => {
@@ -65,16 +65,16 @@ describe('Edit task', () => {
 
 describe('Status update', () => {
   test('task 1 status should be updated to true', () => {
-    localStorageMock.setItem('TODOS', []);
-    let todos = localStorageMock.getItem('TODOS');
+    localStoragemock.setItem('TODOS', []);
+    let todos = [];
     const task1 = { description: 'task 1', completed: false, index: 1 };
     todos.push(task1);
     const task1Statusedited = { description: 'task 1', completed: true, index: 1 };
-    localStorageMock.setItem('Todos', todos);
+    localStoragemock.setItem('TODOS', todos);
     todos = change(task1, todos);
+    localStoragemock.setItem('TODOS', todos);
     expect(todos[0].completed).toBe(task1Statusedited.completed);
-    expect(localStorageMock.getItem.mock.calls.length).toBe(1);
-    expect(localStorageMock.setItem).toHaveBeenCalled();
+    expect(localStoragemock.getItem('TODOS').length).toBe(1);
   });
 
   test('Status update on the DOM', () => {

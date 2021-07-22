@@ -1,8 +1,8 @@
-const clearAll = (todos) => {
-    todos = todos.filter((todo) => todo.completed === false);
-    todos.forEach((todo, i) => {
-      todo.index = i + 1;
-    });
-    return todos;
-  };
-  export default clearAll;
+const clearAllCompleted = (todos) => {
+  todos = todos.filter((todo) => todo.completed === false);
+  todos.forEach((todo, i) => {
+    todo.index = i + 1;
+  });
+  return todos;
+};
+export default clearAllCompleted;
