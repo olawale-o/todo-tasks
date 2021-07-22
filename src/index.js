@@ -4,7 +4,7 @@ import {
 } from './interactive.js';
 import change from './change.js';
 import {
-  addNewTodo, clearAllCompletedTodos, editTodo, onDeleteTodo,
+  addNewTodo, clearAllCompletedTodos, editTodo, onDeleteTodo, updateTodosStorage,
 } from './add-remove.js';
 
 import './stylesheet/style.css';
@@ -99,7 +99,8 @@ const createTodo = (todo) => {
   });
 
   bin.addEventListener('mousedown', (event) => {
-    todos = onDeleteTodo(event.target.id, todos);
+    const currentTodo = parseInt(event.target.id.split('-')[1], 10);
+    todos = onDeleteTodo(currentTodo, todos);
 
     todoTasks.innerHTML = '';
     todos.forEach((td, i) => {
@@ -139,21 +140,33 @@ todos.forEach((task) => {
   todoTasks.appendChild(createTodo(task));
 });
 
+const validateField = (input) => input.trim().length > 0;
+
 const addkey = document.querySelector('#add');
 const task = document.querySelector('#task');
 
 addkey.addEventListener('click', () => {
-  const newTodo = addNewTodo(task, todos);
+  if (!validateField(task.value)) {
+    return false;
+  }
+  const newTodo = addNewTodo(task.value, todos);
+  updateTodosStorage(newTodo, todos);
   todoTasks.appendChild(createTodo(newTodo));
   task.value = '';
+  return true;
 });
 
 task.addEventListener('keydown', (event) => {
   if (event.which === 13) {
-    const newTodo = addNewTodo(task, todos);
+    if (!validateField(task.value)) {
+      return false;
+    }
+    const newTodo = addNewTodo(task.value, todos);
+    updateTodosStorage(newTodo, todos);
     todoTasks.appendChild(createTodo(newTodo));
     task.value = '';
   }
+  return true;
 });
 
 const trashAll = document.querySelector('#trash-all');
