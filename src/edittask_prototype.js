@@ -1,4 +1,4 @@
-const editTodo = (target, todos) => {
+export const editTodo = (target, todos) => {
   todos.forEach((todo) => {
     if (target.index === todo.index) {
       todo.description = target.description;
@@ -7,4 +7,11 @@ const editTodo = (target, todos) => {
   return todos;
 };
 
-export default editTodo;
+export const change = (todo, tasks) => {
+  tasks.forEach((task) => {
+    if (task.index === todo.index) {
+      task.completed = !todo.completed;
+    }
+  });
+  return tasks;
+};

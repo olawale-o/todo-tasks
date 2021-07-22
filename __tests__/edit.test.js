@@ -2,7 +2,7 @@
  * @jest-environment jsdom
 */
 
-import editTodo from '../src/edittask_prototype.js';
+import {editTodo,change} from '../src/edittask_prototype.js';
 import { localStorageMock } from '../__mocks__/mockStorage.js';
 import createTodo from '../src/onclickadd.js';
 
@@ -23,7 +23,7 @@ describe('Edit task', () => {
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
-    createTodo(task[0])
+    createTodo(task[0]);
     const task1Edited = { description: 'task one', completed: false, index: 1 };
     task = editTodo(task1Edited, task);
 
@@ -60,5 +60,64 @@ describe('Edit task', () => {
     expect(list).toHaveLength(3);
     expect(spanTodoTwo.textContent).toEqual(task2Edited.description);
     expect(spanTodoOne.textContent).toEqual(NewTask1.description);
+  });
+});
+
+describe('Status update', () => {
+  test('task 1 status should be updated to true', () => {
+    localStorageMock.setItem('TODOS', []);
+    let todos = localStorageMock.getItem('TODOS');
+    const task1 = { description: 'task 1', completed: false, index: 1 };
+    todos.push(task1);
+    const task1Statusedited = { description: 'task 1', completed: true, index: 1 };
+    localStorageMock.setItem('Todos', todos);
+    todos = change(task1, todos);
+    expect(todos[0].completed).toBe(task1Statusedited.completed);
+    expect(localStorageMock.getItem.mock.calls.length).toBe(1);
+    expect(localStorageMock.setItem).toHaveBeenCalled();
+  });
+
+  test('Status update on the DOM', () => {
+    document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"> </ul>';
+    let task = [];
+    const NewTask1 = { description: 'task 1', completed: false, index: 1 };
+    task.push(NewTask1);
+    createTodo(task[0]);
+    task = change(NewTask1, task);
+
+    const list = document.querySelectorAll('#todo-tasks li');
+    const taskLabel = document.querySelector(`#label-${NewTask1.index}`);
+    const taskBx = taskLabel.querySelector('input');
+    taskBx.checked = task[0].completed;
+    expect(list).toHaveLength(1);
+    expect(taskBx.checked).toEqual(true);
+  });
+
+  test('Add 3 tasks and update status of second task On the DOM', () => {
+    document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"> </ul>';
+    let task = [];
+    const NewTask1 = { description: 'task 1', completed: false, index: 1 };
+    task.push(NewTask1);
+    createTodo(task[0]);
+
+    const NewTask2 = { description: 'task 2', completed: false, index: 2 };
+    task.push(NewTask2);
+    createTodo(task[1]);
+    const NewTask3 = { description: 'task 3', completed: false, index: 3 };
+    task.push(NewTask3);
+    createTodo(task[2]);
+    
+    task = change(NewTask2, task);
+
+    const list = document.querySelectorAll('#todo-tasks li');
+    const taskLabel1 = document.querySelector(`#label-${NewTask1.index}`);
+    const taskLabel2 = document.querySelector(`#label-${NewTask2.index}`);
+    const taskBx1 = taskLabel1.querySelector('input');
+    const taskBx2 = taskLabel2.querySelector('input');
+    taskBx2.checked = task[1].completed;
+    expect(list).toHaveLength(3);
+    expect(taskBx2.checked).toEqual(true);
+    
+    expect(taskBx1.checked).toEqual(false);
   });
 });
