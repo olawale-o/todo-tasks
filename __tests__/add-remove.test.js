@@ -3,49 +3,49 @@ import { localStorageMock } from '../__mocks__/mockStorage.js';
 
 describe('Todo', () => {
   describe('Add Todo', () => {
-    test('add task1', () => {
-      const task1 = 'task 1';
+    test('add taskOne', () => {
+      const taskOne = 'task 1';
       const todos = [];
-      const newTodo1 = addNewTodo(task1, todos);
-      todos.push(newTodo1);
+      const newTodoOne = addNewTodo(taskOne, todos);
+      todos.push(newTodoOne);
 
-      expect(todos[0]).toEqual(newTodo1);
+      expect(todos[0]).toEqual(newTodoOne);
     });
-    test('add task1,task2 and task3', () => {
-      const task1 = 'task 1';
-      const task2 = 'task 2';
-      const task3 = 'task 3';
+    test('add taskOne,taskTwo and taskThree', () => {
+      const taskOne = 'task 1';
+      const taskTwo = 'task 2';
+      const taskThree = 'task 3';
       const todos = [];
-      const newTodo1 = addNewTodo(task1, todos);
-      todos.push(newTodo1);
-      const newTodo2 = addNewTodo(task2,todos);
-      todos.push(newTodo2);
-      const newTodo3 = addNewTodo(task3,todos);
-      todos.push(newTodo3);
-      expect(todos[0]).toEqual(newTodo1);
-      expect(todos[1]).toEqual(newTodo2);
-      expect(todos[2]).toEqual(newTodo3);
+      const newTodoOne = addNewTodo(taskOne, todos);
+      todos.push(newTodoOne);
+      const newTodoTwo = addNewTodo(taskTwo, todos);
+      todos.push(newTodoTwo);
+      const newTodoThree = addNewTodo(taskThree, todos);
+      todos.push(newTodoThree);
+      expect(todos[0]).toEqual(newTodoOne);
+      expect(todos[1]).toEqual(newTodoTwo);
+      expect(todos[2]).toEqual(newTodoThree);
     });
   });
 
   describe('Delete Todo', () => {
-    test('add task1 and remove task1,todos will reduced to 0', () => {
+    test('add taskOne and remove taskOne,todos will reduced to 0', () => {
       let todos = [];
-      const task1 = { description: 'task 1', completed: false, index: 1 };
-      todos.push(task1);
-      todos = onDeleteTodo(task1.index, todos);
+      const taskOne = { description: 'task 1', completed: false, index: 1 };
+      todos.push(taskOne);
+      todos = onDeleteTodo(taskOne.index, todos);
       expect(todos.length).toEqual(0);
     });
 
-    test('add task1,task2 and task3,then remove task2.', () => {
+    test('add taskOne,taskTwo and taskThree,then remove taskTwo.', () => {
       let todos = [];
-      const task1 = { description: 'task 1', completed: false, index: 1 };
-      todos.push(task1);
-      const task2 = { description: 'task 2', completed: false, index: 2 };
-      todos.push(task2);
-      const task3 = { description: 'task 3', completed: false, index: 3 };
-      todos.push(task3);
-      todos = onDeleteTodo(task2.index, todos);
+      const taskOne = { description: 'task 1', completed: false, index: 1 };
+      todos.push(taskOne);
+      const taskTwo = { description: 'task 2', completed: false, index: 2 };
+      todos.push(taskTwo);
+      const taskThree = { description: 'task 3', completed: false, index: 3 };
+      todos.push(taskThree);
+      todos = onDeleteTodo(taskTwo.index, todos);
       expect(todos.length).toEqual(2);
     });
   });
