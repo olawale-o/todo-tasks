@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/olawale-o/todo-tasks/issues"
   },
-  "homepage": "https://github.com/olawale-o/todo-tasks#readme"
+  "homepage": "https://github.com/olawale-o/todo-tasks#readme",
+  "dependencies": {
+    "@jest/globals": "^27.0.6"
+  }
 }
