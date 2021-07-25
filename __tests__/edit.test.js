@@ -2,9 +2,9 @@
  * @jest-environment jsdom
 */
 
-import { editTodo, change } from '../src/edittask_prototype.js';
+import { editTodo, change } from '../__mocks__/edittask_prototype.js';
 import localStoragemock from '../__mocks__/mockStorage.js';
-import createTodo from '../src/onclickadd.js';
+import createTodo from '../__mocks__/onclickadd.js';
 
 describe('Edit task', () => {
   test('task 1 description should be updated to task one', () => {
@@ -20,10 +20,11 @@ describe('Edit task', () => {
 
   test('Edit single task on the DOM', () => {
     document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"> </ul>';
+    const todoTasks = document.querySelector('#todo-tasks');
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
-    createTodo(task[0]);
+    todoTasks.appendChild(createTodo(task[0]));
     const task1Edited = { description: 'task one', completed: false, index: 1 };
     task = editTodo(task1Edited, task);
 
@@ -37,18 +38,19 @@ describe('Edit task', () => {
 
   test('Add 3 tasks and edit second task On the DOM', () => {
     document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"> </ul>';
+    const todoTasks = document.querySelector('#todo-tasks');
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
-    createTodo(task[0]);
+    todoTasks.appendChild(createTodo(task[0]));
 
     const NewTask2 = { description: 'task 2', completed: false, index: 2 };
     task.push(NewTask2);
-    createTodo(task[1]);
+    todoTasks.appendChild(createTodo(task[1]));
 
     const NewTask3 = { description: 'task 3', completed: false, index: 3 };
     task.push(NewTask3);
-    createTodo(task[2]);
+    todoTasks.appendChild(createTodo(task[2]));
     const task2Edited = { description: 'task two', completed: false, index: 2 };
     task = editTodo(task2Edited, task);
 
@@ -79,12 +81,13 @@ describe('Status update', () => {
 
   test('Status update on the DOM', () => {
     document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"> </ul>';
+    const todoTasks = document.querySelector('#todo-tasks');
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
-    createTodo(task[0]);
+    todoTasks.appendChild(createTodo(task[0]));
     task = change(NewTask1, task);
-
+    
     const list = document.querySelectorAll('#todo-tasks li');
     const taskLabel = document.querySelector(`#label-${NewTask1.index}`);
     const taskBx = taskLabel.querySelector('input');
@@ -92,20 +95,21 @@ describe('Status update', () => {
     expect(list).toHaveLength(1);
     expect(taskBx.checked).toEqual(true);
   });
-
+  
   test('Add 3 tasks and update status of second task On the DOM', () => {
     document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"> </ul>';
+    const todoTasks = document.querySelector('#todo-tasks');
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
-    createTodo(task[0]);
-
+    todoTasks.appendChild(createTodo(task[0]));
+    
     const NewTask2 = { description: 'task 2', completed: false, index: 2 };
     task.push(NewTask2);
-    createTodo(task[1]);
+    todoTasks.appendChild(createTodo(task[1]));
     const NewTask3 = { description: 'task 3', completed: false, index: 3 };
     task.push(NewTask3);
-    createTodo(task[2]);
+    todoTasks.appendChild(createTodo(task[2]));
 
     task = change(NewTask2, task);
 
