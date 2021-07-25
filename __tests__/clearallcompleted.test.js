@@ -3,7 +3,7 @@
 */
 
 import localStoragemock from '../__mocks__/mockStorage.js';
-import clearAllCompleted from '../__mocks__/clearallcompleted_prototype.js';
+import clearAllCompletedMock from '../__mocks__/clearCompleted-mock.js';
 import createMockTodo from '../__mocks__/create-todo-mock.js';
 
 describe('Clear completed Tasks and update localStorage', () => {
@@ -17,7 +17,7 @@ describe('Clear completed Tasks and update localStorage', () => {
     todos.push(task2);
     todos.push(task3);
     localStoragemock.setItem('TODOS', todos);
-    todos = clearAllCompleted(todos);
+    todos = clearAllCompletedMock(todos);
     localStoragemock.setItem('TODOS', todos);
     expect(localStoragemock.getItem('TODOS').length).toEqual(1);
     expect(localStoragemock.getItem('TODOS')[0].description).toEqual('task 2');
@@ -39,7 +39,7 @@ describe('Clear completed Tasks and update DOM', () => {
     todos.push(task1);
     todos.push(task2);
     todos.push(task3);
-    todos = clearAllCompleted(todos);
+    todos = clearAllCompletedMock(todos);
     todoTasks.innerHTML = '';
     todoTasks.appendChild(createMockTodo(todos[0]));
     const list = todoTasks.querySelectorAll('li');

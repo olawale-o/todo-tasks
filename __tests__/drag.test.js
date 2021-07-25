@@ -4,7 +4,7 @@
 
 import createMockTodo from '../__mocks__/create-todo-mock.js';
 import localStoragemock from '../__mocks__/mockStorage.js';
-import drop from '../__mocks__/drop_prototype.js';
+import drop from '../__mocks__/drop-mock';
 
 describe('Drag and Drop', () => {
   test('Update index of task1 and task2 after drap and drop in localsStorage', () => {
