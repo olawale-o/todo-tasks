@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import onDeleteTodo from '../__mocks__/onclickremove.js';
+import onDeleteMockTodo from '../__mocks__/remove-todo-mock.js';
 import createMockTodo from '../__mocks__/create-todo-mock.js';
 
 describe('Test Dom on Add new Task', () => {
@@ -45,7 +45,7 @@ describe('Test Dom on Remove Task', () => {
     todoTasks.appendChild(createMockTodo(task[0]));
     todoTasks.appendChild(createMockTodo(task[1]));
     todoTasks.appendChild(createMockTodo(task[2]));
-    task = onDeleteTodo(task[0].index, task);
+    task = onDeleteMockTodo(task[0].index, task);
     todoTasks.innerHTML = '';
     task.forEach((t) => {
       todoTasks.appendChild(createMockTodo(t))
