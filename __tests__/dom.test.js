@@ -6,8 +6,8 @@ import onDeleteMockTodo from '../__mocks__/remove-todo-mock.js';
 import createMockTodo from '../__mocks__/create-todo-mock.js';
 
 describe('Test Dom on Add new Task', () => {
-  test('Add New Task ', () => {
-    document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"> </ul>';
+  test('Add New Task to DOM', () => {
+    document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"></ul>';
     const task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
@@ -27,12 +27,14 @@ describe('Test Dom on Add new Task', () => {
     todoTasks.appendChild(createMockTodo(task[4]));
     const list = document.querySelectorAll('#todo-tasks li');
     expect(list).toHaveLength(5);
+    expect(todoTasks.firstChild.id).toEqual(`id-${task[0].index}`)
+    expect(todoTasks.firstChild.nextSibling.id).toEqual(`id-${task[1].index}`)
   });
 });
 
 describe('Test Dom on Remove Task', () => {
   test('Remove Task ', () => {
-    document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"> </ul>';
+    document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"></ul>';
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
