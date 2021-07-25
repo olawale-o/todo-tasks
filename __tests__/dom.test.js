@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 
-import onDeleteTodo from '../src/onclickremove.js';
-import createTodo from '../src/onclickadd.js';
+import onDeleteTodo from '../__mocks__/onclickremove.js';
+import createTodo from '../__mocks__/onclickadd.js';
 
 describe('Test Dom on Add new Task', () => {
   test('Add New Task ', () => {

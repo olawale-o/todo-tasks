@@ -3,8 +3,8 @@
 */
 
 import localStoragemock from '../__mocks__/mockStorage.js';
-import clearAllCompleted from '../src/clearallcompleted_prototype.js';
-import createTodo from '../src/onclickadd.js';
+import clearAllCompleted from '../__mocks__/clearallcompleted_prototype.js';
+import createTodo from '../__mocks__/onclickadd.js';
 
 describe('Clear completed Tasks and update localStorage', () => {
   test('Add 3 tasks and remove 2 tasks', () => {
@@ -27,23 +27,21 @@ describe('Clear completed Tasks and update localStorage', () => {
 
 describe('Clear completed Tasks and update DOM', () => {
   test('Add 3 tasks and remove 2 tasks', () => {
-    document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"> </ul>';
-
+    document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"></ul>';
+    const todoTasks = document.querySelector('#todo-tasks');
     let todos = [];
     const task1 = { description: 'task 1', completed: true, index: 1 };
-    createTodo(task1);
+    todoTasks.appendChild(createTodo(task1));
     const task2 = { description: 'task 2', completed: false, index: 2 };
-    createTodo(task2);
+    todoTasks.appendChild(createTodo(task2));
     const task3 = { description: 'task 3', completed: true, index: 3 };
-    createTodo(task3);
+    todoTasks.appendChild(createTodo(task3));
     todos.push(task1);
     todos.push(task2);
     todos.push(task3);
     todos = clearAllCompleted(todos);
-
-    const todoTasks = document.querySelector('#todo-tasks');
     todoTasks.innerHTML = '';
-    createTodo(todos[0]);
+    todoTasks.appendChild(createTodo(todos[0]));
     const list = todoTasks.querySelectorAll('li');
     expect(list).toHaveLength(1);
     expect(list[0].textContent).toEqual(task2.description);
