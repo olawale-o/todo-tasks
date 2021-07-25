@@ -4,7 +4,7 @@
 
 import createMockTodo from '../__mocks__/create-todo-mock.js';
 import localStoragemock from '../__mocks__/mockStorage.js';
-import drop from '../__mocks__/drop-mock';
+import drop from '../__mocks__/drop-mock.js';
 
 describe('Drag and Drop', () => {
   test('Update index of task1 and task2 after drap and drop in localsStorage', () => {
@@ -18,10 +18,15 @@ describe('Drag and Drop', () => {
     localStoragemock.setItem('TODOS', todos);
     todos = drop(taskTwo, taskOne, todos);
     localStoragemock.setItem('TODOS', todos);
+    expect(localStoragemock.getItem('TODOS').length).toBe(2);
     expect(localStoragemock.getItem('TODOS')[1].description)
       .toEqual(taskOne.description);
+    expect(localStoragemock.getItem('TODOS')[1].index)
+      .toEqual(2);
     expect(localStoragemock.getItem('TODOS')[0].description)
       .toEqual(taskTwo.description);
+    expect(localStoragemock.getItem('TODOS')[0].index)
+      .toEqual(1);
   });
 
   test('Update index of task1 and task2 after drap and drop on the DOM', () => {

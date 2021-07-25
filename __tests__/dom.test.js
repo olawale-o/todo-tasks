@@ -27,8 +27,8 @@ describe('Test Dom on Add new Task', () => {
     todoTasks.appendChild(createMockTodo(task[4]));
     const list = document.querySelectorAll('#todo-tasks li');
     expect(list).toHaveLength(5);
-    expect(todoTasks.firstChild.id).toEqual(`id-${task[0].index}`)
-    expect(todoTasks.firstChild.nextSibling.id).toEqual(`id-${task[1].index}`)
+    expect(todoTasks.firstChild.id).toEqual(`id-${task[0].index}`);
+    expect(todoTasks.firstChild.nextSibling.id).toEqual(`id-${task[1].index}`);
   });
 });
 
@@ -50,8 +50,8 @@ describe('Test Dom on Remove Task', () => {
     task = onDeleteMockTodo(task[0].index, task);
     todoTasks.innerHTML = '';
     task.forEach((t) => {
-      todoTasks.appendChild(createMockTodo(t))
-    })
+      todoTasks.appendChild(createMockTodo(t));
+    });
     let list = document.querySelectorAll('#todo-tasks li');
     expect(list).toHaveLength(2);
 
