@@ -14,6 +14,7 @@ const createMockTodo = (todo) => {
   span.setAttribute('class', 'todo-list__text');
   span.setAttribute('id', `span-${todo.index}`);
   span.textContent = todo.description;
+  span.style.textDecoration = todo.completed === true ? 'line-through' : 'none';
 
   checkbox.setAttribute('type', 'checkbox');
   checkbox.setAttribute('name', 'todo-task');
