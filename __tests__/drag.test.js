@@ -2,9 +2,9 @@
  * @jest-environment jsdom
 */
 
-import createTodo from '../src/onclickadd.js';
+import createTodo from '../__mocks__/onclickadd.js';
 import localStoragemock from '../__mocks__/mockStorage.js';
-import drop from '../src/drop_prototype.js';
+import drop from '../__mocks__/drop_prototype.js';
 
 describe('Drag and Drop', () => {
   test('Update index of task1 and task2 after drap and drop in localsStorage', () => {
@@ -26,23 +26,23 @@ describe('Drag and Drop', () => {
 
   test('Update index of task1 and task2 after drap and drop on the DOM', () => {
     document.body.innerHTML = '<ul class="todo-tasks" id="todo-tasks"></ul>';
+    const todoTasks = document.querySelector('#todo-tasks');
     let todos = [];
     const taskOne = { description: 'task 1', completed: false, index: 1 };
     todos.push(taskOne);
-    createTodo(todos[0]);
+    todoTasks.appendChild(createTodo(todos[0]));
     const taskTwo = { description: 'task 2', completed: true, index: 2 };
     todos.push(taskTwo);
-    createTodo(todos[1]);
+    todoTasks.appendChild(createTodo(todos[1]));
 
     const spanTaskOne = document.querySelector(`#span-${taskOne.index}`);
 
     expect(spanTaskOne.textContent).toEqual(taskOne.description);
     todos = drop(taskTwo, taskOne, todos);
-    const todoTasks = document.querySelector('#todo-tasks');
     todoTasks.innerHTML = '';
     const [firstLi, secondLi] = todos;
-    createTodo(firstLi);
-    createTodo(secondLi);
+    todoTasks.appendChild(createTodo(firstLi));
+    todoTasks.appendChild(createTodo(secondLi));
 
     expect(todoTasks.firstChild.textContent).toEqual(taskTwo.description);
     expect(todoTasks.firstChild.id).toEqual(`id-${firstLi.index}`);
