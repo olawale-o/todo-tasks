@@ -4,7 +4,7 @@
 
 import { editTodo, change } from '../__mocks__/edittask_prototype.js';
 import localStoragemock from '../__mocks__/mockStorage.js';
-import createTodo from '../__mocks__/onclickadd.js';
+import createMockTodo from '../__mocks__/create-todo-mock.js';
 
 describe('Edit task', () => {
   test('task 1 description should be updated to task one', () => {
@@ -24,7 +24,7 @@ describe('Edit task', () => {
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
-    todoTasks.appendChild(createTodo(task[0]));
+    todoTasks.appendChild(createMockTodo(task[0]));
     const task1Edited = { description: 'task one', completed: false, index: 1 };
     task = editTodo(task1Edited, task);
 
@@ -42,15 +42,15 @@ describe('Edit task', () => {
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
-    todoTasks.appendChild(createTodo(task[0]));
+    todoTasks.appendChild(createMockTodo(task[0]));
 
     const NewTask2 = { description: 'task 2', completed: false, index: 2 };
     task.push(NewTask2);
-    todoTasks.appendChild(createTodo(task[1]));
+    todoTasks.appendChild(createMockTodo(task[1]));
 
     const NewTask3 = { description: 'task 3', completed: false, index: 3 };
     task.push(NewTask3);
-    todoTasks.appendChild(createTodo(task[2]));
+    todoTasks.appendChild(createMockTodo(task[2]));
     const task2Edited = { description: 'task two', completed: false, index: 2 };
     task = editTodo(task2Edited, task);
 
@@ -85,7 +85,7 @@ describe('Status update', () => {
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
-    todoTasks.appendChild(createTodo(task[0]));
+    todoTasks.appendChild(createMockTodo(task[0]));
     task = change(NewTask1, task);
     
     const list = document.querySelectorAll('#todo-tasks li');
@@ -102,14 +102,14 @@ describe('Status update', () => {
     let task = [];
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
-    todoTasks.appendChild(createTodo(task[0]));
+    todoTasks.appendChild(createMockTodo(task[0]));
     
     const NewTask2 = { description: 'task 2', completed: false, index: 2 };
     task.push(NewTask2);
-    todoTasks.appendChild(createTodo(task[1]));
+    todoTasks.appendChild(createMockTodo(task[1]));
     const NewTask3 = { description: 'task 3', completed: false, index: 3 };
     task.push(NewTask3);
-    todoTasks.appendChild(createTodo(task[2]));
+    todoTasks.appendChild(createMockTodo(task[2]));
 
     task = change(NewTask2, task);
 

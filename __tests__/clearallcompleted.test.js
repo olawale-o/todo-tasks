@@ -4,7 +4,7 @@
 
 import localStoragemock from '../__mocks__/mockStorage.js';
 import clearAllCompleted from '../__mocks__/clearallcompleted_prototype.js';
-import createTodo from '../__mocks__/onclickadd.js';
+import createMockTodo from '../__mocks__/create-todo-mock.js';
 
 describe('Clear completed Tasks and update localStorage', () => {
   test('Add 3 tasks and remove 2 tasks', () => {
@@ -31,17 +31,17 @@ describe('Clear completed Tasks and update DOM', () => {
     const todoTasks = document.querySelector('#todo-tasks');
     let todos = [];
     const task1 = { description: 'task 1', completed: true, index: 1 };
-    todoTasks.appendChild(createTodo(task1));
+    todoTasks.appendChild(createMockTodo(task1));
     const task2 = { description: 'task 2', completed: false, index: 2 };
-    todoTasks.appendChild(createTodo(task2));
+    todoTasks.appendChild(createMockTodo(task2));
     const task3 = { description: 'task 3', completed: true, index: 3 };
-    todoTasks.appendChild(createTodo(task3));
+    todoTasks.appendChild(createMockTodo(task3));
     todos.push(task1);
     todos.push(task2);
     todos.push(task3);
     todos = clearAllCompleted(todos);
     todoTasks.innerHTML = '';
-    todoTasks.appendChild(createTodo(todos[0]));
+    todoTasks.appendChild(createMockTodo(todos[0]));
     const list = todoTasks.querySelectorAll('li');
     expect(list).toHaveLength(1);
     expect(list[0].textContent).toEqual(task2.description);

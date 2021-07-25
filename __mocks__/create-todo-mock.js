@@ -1,5 +1,5 @@
 // For Test only////
-const createTodo = (todo) => {
+const createMockTodo = (todo) => {
   const li = document.createElement('li');
   li.setAttribute('class', 'todo-list');
   li.setAttribute('id', `id-${todo.index}`);
@@ -37,8 +37,6 @@ const createTodo = (todo) => {
   div.appendChild(icon);
   div.appendChild(bin);
   li.appendChild(div);
-  //const todoTasks = document.querySelector('#todo-tasks');
-  //todoTasks.appendChild(li);
   return li;
 };
-export default createTodo;
+export default createMockTodo;

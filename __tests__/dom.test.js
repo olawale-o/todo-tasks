@@ -3,7 +3,7 @@
  */
 
 import onDeleteTodo from '../__mocks__/onclickremove.js';
-import createTodo from '../__mocks__/onclickadd.js';
+import createMockTodo from '../__mocks__/create-todo-mock.js';
 
 describe('Test Dom on Add new Task', () => {
   test('Add New Task ', () => {
@@ -20,11 +20,11 @@ describe('Test Dom on Add new Task', () => {
     const NewTask5 = { description: 'task 5', completed: false, index: 5 };
     task.push(NewTask5);
     const todoTasks = document.querySelector('#todo-tasks');
-    todoTasks.appendChild(createTodo(task[0]));
-    todoTasks.appendChild(createTodo(task[1]));
-    todoTasks.appendChild(createTodo(task[2]));
-    todoTasks.appendChild(createTodo(task[3]));
-    todoTasks.appendChild(createTodo(task[4]));
+    todoTasks.appendChild(createMockTodo(task[0]));
+    todoTasks.appendChild(createMockTodo(task[1]));
+    todoTasks.appendChild(createMockTodo(task[2]));
+    todoTasks.appendChild(createMockTodo(task[3]));
+    todoTasks.appendChild(createMockTodo(task[4]));
     const list = document.querySelectorAll('#todo-tasks li');
     expect(list).toHaveLength(5);
   });
@@ -42,19 +42,19 @@ describe('Test Dom on Remove Task', () => {
     task.push(NewTask3);
 
     const todoTasks = document.querySelector('#todo-tasks');
-    todoTasks.appendChild(createTodo(task[0]));
-    todoTasks.appendChild(createTodo(task[1]));
-    todoTasks.appendChild(createTodo(task[2]));
+    todoTasks.appendChild(createMockTodo(task[0]));
+    todoTasks.appendChild(createMockTodo(task[1]));
+    todoTasks.appendChild(createMockTodo(task[2]));
     task = onDeleteTodo(task[0].index, task);
     todoTasks.innerHTML = '';
     task.forEach((t) => {
-      todoTasks.appendChild(createTodo(t))
+      todoTasks.appendChild(createMockTodo(t))
     })
     let list = document.querySelectorAll('#todo-tasks li');
     expect(list).toHaveLength(2);
 
     task.push(NewTask3);
-    todoTasks.appendChild(createTodo(task[0]));
+    todoTasks.appendChild(createMockTodo(task[0]));
     list = document.querySelectorAll('#todo-tasks li');
     expect(list).toHaveLength(3);
   });
