@@ -37,7 +37,8 @@ const createTodo = (todo) => {
   div.appendChild(icon);
   div.appendChild(bin);
   li.appendChild(div);
-  const todoTasks = document.querySelector('#todo-tasks');
-  todoTasks.appendChild(li);
+  //const todoTasks = document.querySelector('#todo-tasks');
+  //todoTasks.appendChild(li);
+  return li;
 };
 export default createTodo;
