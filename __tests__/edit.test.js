@@ -2,7 +2,7 @@
  * @jest-environment jsdom
 */
 
-import { editTodo, change } from '../__mocks__/edittask_prototype.js';
+import { editMockTodo, changeMock } from '../__mocks__/edit-mock';
 import localStoragemock from '../__mocks__/mockStorage.js';
 import createMockTodo from '../__mocks__/create-todo-mock.js';
 
@@ -14,7 +14,7 @@ describe('Edit task', () => {
     todo.push(task1);
     const task1Edited = { description: 'task one', completed: false, index: 1 };
     localStoragemock.setItem('TODOS', todo);
-    todo = editTodo(task1Edited, todo);
+    todo = editMockTodo(task1Edited, todo);
     expect(localStoragemock.getItem('TODOS')[0].description).toEqual(task1Edited.description);
   });
 
@@ -26,7 +26,7 @@ describe('Edit task', () => {
     task.push(NewTask1);
     todoTasks.appendChild(createMockTodo(task[0]));
     const task1Edited = { description: 'task one', completed: false, index: 1 };
-    task = editTodo(task1Edited, task);
+    task = editMockTodo(task1Edited, task);
 
     const list = document.querySelectorAll('#todo-tasks li');
     const spanTodo = document.querySelector(`#span-${NewTask1.index}`);
@@ -52,7 +52,7 @@ describe('Edit task', () => {
     task.push(NewTask3);
     todoTasks.appendChild(createMockTodo(task[2]));
     const task2Edited = { description: 'task two', completed: false, index: 2 };
-    task = editTodo(task2Edited, task);
+    task = editMockTodo(task2Edited, task);
 
     const list = document.querySelectorAll('#todo-tasks li');
     const spanTodoOne = document.querySelector(`#span-${NewTask1.index}`);
@@ -73,7 +73,7 @@ describe('Status update', () => {
     todos.push(task1);
     const task1Statusedited = { description: 'task 1', completed: true, index: 1 };
     localStoragemock.setItem('TODOS', todos);
-    todos = change(task1, todos);
+    todos = changeMock(task1, todos);
     localStoragemock.setItem('TODOS', todos);
     expect(todos[0].completed).toBe(task1Statusedited.completed);
     expect(localStoragemock.getItem('TODOS').length).toBe(1);
@@ -86,7 +86,7 @@ describe('Status update', () => {
     const NewTask1 = { description: 'task 1', completed: false, index: 1 };
     task.push(NewTask1);
     todoTasks.appendChild(createMockTodo(task[0]));
-    task = change(NewTask1, task);
+    task = changeMock(NewTask1, task);
     
     const list = document.querySelectorAll('#todo-tasks li');
     const taskLabel = document.querySelector(`#label-${NewTask1.index}`);
@@ -111,7 +111,7 @@ describe('Status update', () => {
     task.push(NewTask3);
     todoTasks.appendChild(createMockTodo(task[2]));
 
-    task = change(NewTask2, task);
+    task = changeMock(NewTask2, task);
 
     const list = document.querySelectorAll('#todo-tasks li');
     const taskLabel1 = document.querySelector(`#label-${NewTask1.index}`);

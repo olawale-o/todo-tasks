@@ -1,4 +1,4 @@
-export const editTodo = (target, todos) => {
+export const editMockTodo = (target, todos) => {
   todos.forEach((todo) => {
     if (target.index === todo.index) {
       todo.description = target.description;
@@ -7,7 +7,7 @@ export const editTodo = (target, todos) => {
   return todos;
 };
 
-export const change = (todo, tasks) => {
+export const changeMock = (todo, tasks) => {
   tasks.forEach((task) => {
     if (task.index === todo.index) {
       task.completed = !todo.completed;
