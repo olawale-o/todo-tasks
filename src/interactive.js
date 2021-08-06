@@ -75,6 +75,8 @@ export function drop(event) {
       label.id = `label-${b + 1}`;
       const checkmark = it.querySelector('.checkmark');
       checkmark.id = `task-${b + 1}`;
+      const checkbox = it.querySelector('input');
+      checkbox.id = `checkbox-${b + 1}`;
       const todoText = it.querySelector('.todo-list__text');
       todoText.id = `span-${b + 1}`;
       const move = it.querySelector('.move');
