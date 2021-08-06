@@ -1,12 +1,14 @@
-import { setStorage } from './storage.js';
+import { setStorage, getStorage } from './storage.js';
 
-const change = (todo, tasks) => {
+const change = (todo) => {
+  const tasks = getStorage('TODOS');
   tasks.forEach((task) => {
-    if (task.index === todo.index) {
-      task.completed = !todo.completed;
+    if (task.index === todo) {
+      task.completed = !task.completed;
     }
   });
   setStorage('TODOS', tasks);
+  return tasks;
 };
 
 export default change;

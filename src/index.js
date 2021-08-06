@@ -51,6 +51,7 @@ const createTodo = (todo) => {
   label.setAttribute('class', 'label');
   label.setAttribute('id', `label-${todo.index}`);
   const checkbox = document.createElement('input');
+  checkbox.setAttribute('id', `checkbox-${todo.index}`);
 
   const span = document.createElement('span');
   span.setAttribute('class', 'todo-list__text');
@@ -60,14 +61,14 @@ const createTodo = (todo) => {
   checkbox.setAttribute('type', 'checkbox');
   checkbox.setAttribute('name', 'todo-task');
   checkbox.checked = todo.completed === true;
-  checkbox.onchange = () => {
-    change(todo, todos);
-    if (todo.completed) {
-      span.style.textDecoration = 'line-through';
-    } else {
-      span.style.textDecoration = 'none';
-    }
-  };
+  checkbox.addEventListener('change', (event) => {
+    const currentTodo = parseInt(event.target.id.split('-')[1], 10);
+    const newTodos = change(currentTodo);
+    todoTasks.innerHTML = '';
+    newTodos.forEach((task) => {
+      todoTasks.appendChild(createTodo(task));
+    });
+  });
   label.appendChild(checkbox);
   const sp = document.createElement('span');
   sp.setAttribute('class', 'checkmark');
@@ -171,7 +172,7 @@ task.addEventListener('keydown', (event) => {
 
 const trashAll = document.querySelector('#trash-all');
 trashAll.addEventListener('click', () => {
-  const tds = clearAllCompletedTodos(todos);
+  const tds = clearAllCompletedTodos();
   todoTasks.innerHTML = '';
   tds.forEach((task) => {
     todoTasks.appendChild(createTodo(task));

@@ -14,7 +14,8 @@ export const addNewTodo = (task, todos) => {
   return newTodo;
 };
 
-export const clearAllCompletedTodos = (todos) => {
+export const clearAllCompletedTodos = () => {
+  let todos = getStorage('TODOS');
   todos = todos.filter((todo) => todo.completed === false);
   todos.forEach((todo, i) => {
     todo.index = i + 1;
