@@ -1,4 +1,5 @@
-import { addNewTodo, onDeleteTodo } from '../src/add-remove.js';
+import { addNewTodo } from '../src/add-remove.js';
+import onDeleteTodoMock from '../__mocks__/deletetodo.mock.js';
 import localStoragemock from '../__mocks__/mockStorage.js';
 
 describe('Todo', () => {
@@ -32,21 +33,16 @@ describe('Todo', () => {
     test('add taskOne and remove taskOne,todos will reduced to 0', () => {
       let todos = [];
       const taskOne = { description: 'task 1', completed: false, index: 1 };
-      todos.push(taskOne);
-      todos = onDeleteTodo(taskOne.index, todos);
-      expect(todos.length).toEqual(0);
+      todos = onDeleteTodoMock(taskOne.index);
+      expect(todos.length).toEqual(2);
     });
 
     test('add taskOne,taskTwo and taskThree,then remove taskTwo.', () => {
       let todos = [];
-      const taskOne = { description: 'task 1', completed: false, index: 1 };
-      todos.push(taskOne);
       const taskTwo = { description: 'task 2', completed: false, index: 2 };
-      todos.push(taskTwo);
-      const taskThree = { description: 'task 3', completed: false, index: 3 };
-      todos.push(taskThree);
-      todos = onDeleteTodo(taskTwo.index, todos);
+      todos = onDeleteTodoMock(taskTwo.index);
       expect(todos.length).toEqual(2);
+      expect(todos[1].index).not.toEqual(taskTwo.index);
     });
   });
 
