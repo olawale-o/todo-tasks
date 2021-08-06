@@ -150,8 +150,8 @@ addkey.addEventListener('click', () => {
   if (!validateField(task.value)) {
     return false;
   }
-  const newTodo = addNewTodo(task.value, todos);
-  updateTodosStorage(newTodo, todos);
+  const newTodo = addNewTodo(task.value);
+  updateTodosStorage(newTodo);
   todoTasks.appendChild(createTodo(newTodo));
   task.value = '';
   return true;
@@ -162,8 +162,8 @@ task.addEventListener('keydown', (event) => {
     if (!validateField(task.value)) {
       return false;
     }
-    const newTodo = addNewTodo(task.value, todos);
-    updateTodosStorage(newTodo, todos);
+    const newTodo = addNewTodo(task.value);
+    updateTodosStorage(newTodo);
     todoTasks.appendChild(createTodo(newTodo));
     task.value = '';
   }

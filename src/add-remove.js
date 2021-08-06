@@ -1,11 +1,13 @@
 import { setStorage, getStorage } from './storage.js';
 
-export const updateTodosStorage = (newTodo, todos) => {
+export const updateTodosStorage = (newTodo) => {
+  const todos = getStorage('TODOS');
   todos.push(newTodo);
   setStorage('TODOS', todos);
 };
 
-export const addNewTodo = (task, todos) => {
+export const addNewTodo = (task) => {
+  const todos = getStorage('TODOS');
   const newTodo = {
     index: todos.length < 1 ? 1 : todos.length + 1,
     description: task,
