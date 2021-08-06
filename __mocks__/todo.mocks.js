@@ -1,5 +1,5 @@
 const mockTodo = () => {
-  let todos = [];
+  const todos = [];
   const taskOne = { description: 'task 1', completed: false, index: 1 };
   todos.push(taskOne);
   const taskTwo = { description: 'task 2', completed: false, index: 2 };
