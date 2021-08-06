@@ -71,8 +71,16 @@ export function drop(event) {
     for (let b = 0; b < items.length; b += 1) {
       const it = items[b];
       it.id = `id-${b + 1}`;
-      const span = it.querySelector('span');
-      span.id = `task-${b + 1}`;
+      const label = it.querySelector('.label');
+      label.id = `label-${b + 1}`;
+      const checkmark = it.querySelector('.checkmark');
+      checkmark.id = `task-${b + 1}`;
+      const todoText = it.querySelector('.todo-list__text');
+      todoText.id = `span-${b + 1}`;
+      const move = it.querySelector('.move');
+      move.id = `icon-${b + 1}`;
+      const bin = it.querySelector('.bin');
+      bin.id = `bin-${b + 1}`;
     }
     setStorage('TODOS', tds);
   }
