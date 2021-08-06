@@ -1,4 +1,4 @@
-import { setStorage } from './storage.js';
+import { setStorage, getStorage } from './storage.js';
 
 export const updateTodosStorage = (newTodo, todos) => {
   todos.push(newTodo);
@@ -23,7 +23,8 @@ export const clearAllCompletedTodos = (todos) => {
   return todos;
 };
 
-export const editTodo = (target, todos) => {
+export const editTodo = (target) => {
+  const todos = getStorage('TODOS');
   const id = parseInt(target.id.split('-')[1], 10);
   todos.forEach((todo) => {
     if (id === todo.index) {
@@ -33,7 +34,8 @@ export const editTodo = (target, todos) => {
   setStorage('TODOS', todos);
 };
 
-export const onDeleteTodo = (target, todos) => {
+export const onDeleteTodo = (target) => {
+  let todos = getStorage('TODOS');
   todos = todos.filter((todo) => target !== todo.index);
   return todos;
 };

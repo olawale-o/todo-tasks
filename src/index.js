@@ -100,7 +100,7 @@ const createTodo = (todo) => {
 
   bin.addEventListener('mousedown', (event) => {
     const currentTodo = parseInt(event.target.id.split('-')[1], 10);
-    todos = onDeleteTodo(currentTodo, todos);
+    todos = onDeleteTodo(currentTodo);
 
     todoTasks.innerHTML = '';
     todos.forEach((td, i) => {
@@ -128,7 +128,7 @@ const createTodo = (todo) => {
       event.target.style.textDecorationColor = 'initial';
       completed = null;
     }
-    editTodo(event.target, todos);
+    editTodo(event.target);
     li.classList.remove('focus');
     span.removeAttribute('contenteditable');
   });
